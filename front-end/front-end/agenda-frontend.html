@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>CRUD - Beckend + Front End </title>
+</head>
+<body>
+    <h1>CRUD SIMPLE PAGE with Vues.js</h1>
+    <div id="app">
+     <!--- Details contatos---->
+    <div id="lista">
+        <ul>
+            <li v-for="item in listaContatos">
+                {{item.nome}}
+
+
+            </li>
+        </ul>
+
+    </div>
+    <button @click="listaTodos"> Atualizar</button>
+      <!--- Details contatos---->
+    <div id="detalhes">
+
+
+    </div>
+  <!--- forms info ---->
+    <div id="formulario">
+
+
+    </div>
+    <div>
+        <label for="nome"> nome</label>
+        <input type="text" id="nome" name="nome" v-model="contato.nome">
+    </div>
+
+</div>
+<div>
+    <label for="email"> e-mail</label>
+    <input type="text" id="email" name="email" v-model="contato.email">
+</div>
+</div>
+<div>
+    <label for="email"> Tipo</label>
+    <input type="text" id="tipo" name="tipo" v-model="contato.tipo">
+</div>
+</div>
+<div>
+    <label for="telefone"> e-mail</label>
+    <input type="text" id="telefone" name="telefone" v-model="contato.email">
+</div>
+<button @click="salvarc"> Salvar</button>
+<button @click="editarc"> editar</button>
+<button @click="excluir"> excluir</button>
+<script>
+    var app = new Vue({
+        el: '#app', 
+        data: {
+            listaContatos: []      
+        },
+        created: function(){
+            this.listaTodos();
+
+
+        },
+        methods: {
+            listaTodos: function(){
+                fetch('http://localhost:8080')
+            .then((resposta)=> resposta.jason())
+            .then((objetoJason) => {
+                console.log(objetoJason);
+                this.listaTodos = objetoJason;
+             });
+          }
+         
+        }
+        salvar: function() {
+            const headers = mew Headers({ 'Conte-type': ' aplication/json'});
+            fetch('http://localhost:8080/cadastro' ,
+            {
+                method: 'POST'
+                headers,
+                body: JSON.stringify(this.contato)
+            }
+            )
+        }
+        criaNovo: function({
+            this.contatos{
+                this.exbirInf();
+            }
+        })
+        
+    });
+    deletar: function(id) {
+        fetch('http://localhost:8080/deletar/' + id)
+        .then (() => {
+            this.listaTodos();
+            this.contato = {};
+        })
+        edit
+
+
+           
+            }
+</script>
+
+</div>
+</body>
+</html>
